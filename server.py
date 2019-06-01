@@ -1,6 +1,6 @@
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from io import BytesIO
-import deskew
+import imageHandler
 
 PORT = 8000
 
@@ -12,6 +12,8 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
         self.send_response(200)
         self.end_headers()
         response = BytesIO()
+        newUrl = imageHandler.handleImage
+        response.body = { "url" : newUrl}
         response.write(b'This is POST request. ')
         response.write(b'Received: ')
         response.write(body)

@@ -33,3 +33,5 @@ def deskew(inputImage):
     cv2.waitKey(0)
 
     print("all good!")
+
+    return rotated

@@ -1,6 +1,7 @@
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from io import BytesIO
 import imageHandler
+import json
 
 PORT = 8000
 
@@ -9,14 +10,11 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
     def do_POST(self):
         content_length = int(self.headers['Content-Length'])
         body = self.rfile.read(content_length)
+        url = json.loads(body.decode())['url']
         self.send_response(200)
         self.end_headers()
         response = BytesIO()
-        newUrl = imageHandler.handleImage
-        response.body = { "url" : newUrl}
-        response.write(b'This is POST request. ')
-        response.write(b'Received: ')
-        response.write(body)
+        response.write(str.encode(imageHandler.handleImage(url)))
         self.wfile.write(response.getvalue())
 
 httpd = HTTPServer(('localhost', PORT), SimpleHTTPRequestHandler)

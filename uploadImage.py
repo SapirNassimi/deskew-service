@@ -6,7 +6,7 @@ import datetime
 def saveImageToAmazon():
     bucketName = "hesbonit"
     key = "deskewd.jpg"
-    outPutname = "deskewd" + str(datetime.datetime.now()) + ".jpeg"
+    outPutname = ("deskewd" + str(datetime.datetime.now()) + ".jpeg").replace(" ", "-")
 
     try:
         s3 = boto3.client('s3')
@@ -14,7 +14,7 @@ def saveImageToAmazon():
 
         print("image uploaded successfully to Amazon")
 
-        return '%s/%s/%s' % (s3.meta.endpoint_url, bucketName, key)
+        return '%s/%s/%s' % (s3.meta.endpoint_url, bucketName, outPutname)
     except:
         print("couldnt upload image to Amazon")
 

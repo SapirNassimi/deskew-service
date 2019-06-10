@@ -14,10 +14,8 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
         self.send_response(200)
         self.end_headers()
         response = BytesIO()
-        urlToReturn = {}
-        urlToReturn['url'] = imageHandler.handleImage(url)
-        #response.write(str.encode(urlToReturn))
-        response.write(json.dumps(urlToReturn))
+        urlToReturn = imageHandler.handleImage(url)
+        response.write(str.encode(urlToReturn)) 
         self.wfile.write(response.getvalue())
 
 httpd = HTTPServer(('localhost', PORT), SimpleHTTPRequestHandler)

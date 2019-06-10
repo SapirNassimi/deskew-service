@@ -1,5 +1,8 @@
 import deskew
-
+import urllib.request
+from PIL import Image
+import uploadImage
+import uploadImage
 
 # function that 
 # receives a url
@@ -11,21 +14,16 @@ import deskew
 
 
 def handleImage(url):    
-    skewdImage = getImageFromUrl(url)
-    deskewdImage = deskew.deskew(skewdImage)
-    
-    return (saveImageToAmazon(deskewdImage))
+    getImageFromUrl(url)
+    deskewdImage = deskew.deskew("skewd.jpg")
+    outImage = Image.fromarray(deskewdImage)
+    outImage.save("deskewd.jpg", "JPEG")
+
+    return (uploadImage.saveImageToAmazon())
+
 
 def getImageFromUrl(url):
-    
-    skewdImage = 0 # ???
+    skewdImage = Image.open(urllib.request.urlopen(url))
+    skewdImage.save("skewd.jpg", "JPEG")
 
     return skewdImage
-
-def saveImageToAmazon(image):
-    # save to amazon
-    # get url
-
-    url = 0 # ????
-
-    return url

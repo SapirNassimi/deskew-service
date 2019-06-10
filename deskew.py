@@ -30,7 +30,7 @@ def deskew(inputImage):
     print("[INFO] angle: {:.3f}".format(angle))
     cv2.imshow("Input", image)
     cv2.imshow("Rotated", rotated)
-    cv2.waitKey(0)
+    #cv2.waitKey(0)
 
     print("all good!")
 
